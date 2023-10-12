@@ -7,9 +7,36 @@
 </head>
 <body>
 
+    <ul id="en"></ul>
+
+    <ul id="ru"></ul>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.js"></script>
 
-    <script> var user = {
+    <script>
+
+        let enblock = document.getElementById("en");
+        let rublock = document.getElementById("ru");
+
+        for(let i = 0; i < 20; i++) {
+            let block = faker.internet.email().toLowerCase()  + ", " + faker.name.firstName() + ", " +
+            faker.name.lastName();
+            enblock.insertAdjacentHTML("beforeend", "<li>" + block + "</li>");
+        }
+
+        faker.locale = 'ru';
+
+        for (let i = 0; i < 20; i++) {
+                faker.locale = 'en';
+                let block = faker.internet.email().toLowerCase()
+
+                faker.locale = 'ru';
+                block += ", " + faker.name.firstName() + ", " +
+                    faker.name.lastName();
+                rublock.insertAdjacentHTML("beforeend", "<li>" + block + "</li>");
+            }
+
+        var user = {
             login: faker.internet.email(), name: faker.name.firstName(),
             surname: faker.name.lastName(), country: faker.address.country(),
             avatar: faker.image.avatar(),
